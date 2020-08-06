@@ -19,7 +19,6 @@ describe("API testing", () => {
             expect(response.body).toStrictEqual([
               "Akshay",
               "Arjun.D",
-              "Jim",
               "John Smith",
             ]);
           });

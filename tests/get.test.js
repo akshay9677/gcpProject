@@ -6,7 +6,7 @@ describe("API testing", () => {
     return request(app)
       .get("/")
       .then((response) => {
-        expect(response.body).toStrictEqual(["Akshay", "Jim", "John Smith"]);
+        expect(response.body).toStrictEqual(["Akshay", "John Smith"]);
       });
   });
 });
