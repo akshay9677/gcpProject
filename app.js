@@ -26,11 +26,22 @@ app.get("/query", async (req, res) => {
   const query = datastore
     .createQuery("Task")
     .filter("name", "=", "Akshay")
-    .filter("age", ">", 20);
-  const [tasks] = await datastore.runQuery(query);
-  return res.send(tasks);
+    .filter("age", "<", 1);
+  try {
+    var [tasks] = await datastore.runQuery(query);
+    if (tasks.length == 0) {
+      return res.send("Erro Ocuured: No Data received");
+    }
+    return res.send(tasks);
+  } catch (e) {
+    return res.send(e);
+  }
 });
-
+app.post("/log_payload", (req, res) => {
+  // Log the request payload
+  console.log("Received task with payload: %s", req.body);
+  res.send(`Printed task payload: ${req.body}`).end();
+});
 app.post("/:id", (req, res) => {
   const taskKey = datastore.key([kind, Number(req.params.id)]);
   const val = {
