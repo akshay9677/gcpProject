@@ -18,11 +18,17 @@ const kind = "Task";
 app.get("/", async (req, res) => {
   const query = datastore.createQuery("Task").order("name");
   const [tasks] = await datastore.runQuery(query);
-  const names = [];
-  tasks.forEach((x) => {
-    names.push(x.name);
-  });
+  const names = tasks.map((a) => a.name);
   return res.send(names);
+});
+
+app.get("/query", async (req, res) => {
+  const query = datastore
+    .createQuery("Task")
+    .filter("name", "=", "Akshay")
+    .filter("age", ">", 20);
+  const [tasks] = await datastore.runQuery(query);
+  return res.send(tasks);
 });
 
 app.post("/:id", (req, res) => {

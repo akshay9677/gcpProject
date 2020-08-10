@@ -1,0 +1,7 @@
+indexes:
+  - kind: Task
+    properties:
+      - name: name
+        direction: asc
+      - name: age
+        direction: desc
